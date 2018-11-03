@@ -1,10 +1,10 @@
 // https://nodemailer.com
 const nodemailer = require('nodemailer')
-const {SUBSCRIBE_USERS, EmailAuth} = require('../config') // Subscribe user email
+const {SUBSCRIBE_USERS, EmailAuth = {}} = require('../../config') // Subscribe user email
 
 const transporter = nodemailer.createTransport({
   // service: 'hotmail',
-  host: "smtp.qq.com",
+  host: 'smtp.qq.com',
   port: 465,
   secure: true, // true for 465, false for other ports
   auth: EmailAuth,

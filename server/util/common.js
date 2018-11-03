@@ -3,7 +3,7 @@ const fs = require('fs')
 // https://github.com/showdownjs/showdown
 const showdown = require('showdown')
 const xssFilter = require('showdown-xss-filter')
-const {classMap} = require('../config')
+const {classMap = []} = require('../../config')
 
 const resolve = (d, ...p) => path.resolve(d, ...p) // Return to absolute path of file
 const converter = new showdown.Converter({
@@ -60,7 +60,6 @@ module.exports = {
   resolve,
   getFiles,
   getDirectorys,
-  getCommonRecord,
   format,
   attrSort,
   strToTimeStamp,

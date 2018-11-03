@@ -1,6 +1,6 @@
 {
-  "name": "blog",
-  "version": "2.0.0",
+  "name": "koa-template",
+  "version": "3.0.0",
   "main": "main.js",
   "scripts": {
     "start": "node main.js"
@@ -10,9 +10,11 @@
     "@sendgrid/mail": "^6.3.1",
     "axios": "^0.18.0",
     "ejs": "^2.6.1",
+    "joi": "^14.0.4",
     "koa": "^2.5.2",
     "koa-bodyparser": "^4.2.1",
     "koa-compose": "^4.1.0",
+    "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa-views": "^6.1.4",
