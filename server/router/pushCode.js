@@ -1,3 +1,4 @@
+const Joi = require('joi')
 const {execSync} = require('child_process')
 const {PROCESS_DIR} = require('../util/constant')
 const db = require('../../db/index')
@@ -7,7 +8,14 @@ const sendEmail = require('../controller/sendEmail')
 module.exports = {
   path: '/',
   method: 'get',
+  schema: {
+    head_commit: Joi.number().required(),
+    repository: Joi.object().required(),
+    ref: Joi.string().required(), // .error(new Error('Was REALLY expecting a string'))
+  },
   function (ctx) {
+    // ctx.redirect('/login');
+    // ctx.status = 301;
     const {head_commit, repository, ref} = ctx.request.body
     const {title} = getCommonRecord(ctx)
     const stdout = execSync(`"./git_pull.sh"`, {cwd: PROCESS_DIR})

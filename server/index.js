@@ -13,6 +13,8 @@ const router = require('./router/index')
 
 const app = new Koa()
 
+// app.context.db = db(); // 创建 ctx 的原型，使用：console.log(ctx.db)
+
 app.use(logger()).
   // use(document).
   use(views).

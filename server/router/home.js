@@ -1,3 +1,5 @@
+const Joi = require('joi')
+
 module.exports = {
   path: '/',
   method: 'get',
