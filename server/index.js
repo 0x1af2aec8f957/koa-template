@@ -9,11 +9,12 @@ const logger = require('koa-logger')
 // const document = require('./middleware/document')
 const views = require('./middleware/views')
 const statics = require('./middleware/static')
-const router = require('./router/index')
+const router = require('./router')
+const db = require('../db')
 
 const app = new Koa()
 
-// app.context.db = db(); // 创建 ctx 的原型，使用：console.log(ctx.db)
+app.context.db = db(); // 创建 ctx 的原型，使用：console.log(ctx.db)
 
 app.use(logger()).
   // use(document).
