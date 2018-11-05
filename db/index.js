@@ -3,7 +3,9 @@
 // doc:https://mongoosejs.com/docs/guide.html
 const mongoose = require('mongoose')
 const {db: mongooseOptions = {}} = require('../config')
-const schemas = [require('./blog')]
+const {resolve, getFiles} = require('../server/util/common')
+const files = getFiles(resolve('db')).filter(item => !~item.indexOf('index.js'))
+const schemas = files.map(path => require(path))
 
 const db = mongoose.connection
 
