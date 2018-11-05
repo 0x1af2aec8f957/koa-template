@@ -7,8 +7,8 @@ const schemas = [require('./blog')]
 
 const db = mongoose.connection
 
-db.on('error', error => console.log('\033[30;41m ERROR \033[31;40m Mongodb connection error:' + error + '\033[0m'))
-db.once('open', console.log.bind(console, '\033[30;44m SUCCESS \033[34;40m Mongodb connection success!\033[0m'))
+db.on('error', error => console.log('\033[30;41m ERROR \033[31;40m Mongodb connection error:' + error + '\033[0m\n'))
+db.once('open', console.log.bind(console, '\033[30;44m SUCCESS \033[34;40m Mongodb connection success!\033[0m\n'))
 
 mongoose.connect('mongodb://localhost/test', {
   ...mongooseOptions,
