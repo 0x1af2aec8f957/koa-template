@@ -4,6 +4,7 @@
 const mongoose = require('mongoose')
 const {db: mongooseOptions = {}} = require('../config')
 const {resolve, getFiles} = require('../server/util/common')
+
 const files = getFiles(resolve('db')).filter(item => !~item.indexOf('index.js'))
 const schemas = files.map(path => require(path))
 
