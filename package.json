@@ -1,16 +1,18 @@
 {
-  "name": "koa-template",
-  "version": "3.0.0",
+  "name": "petrifaction-project",
+  "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js"
+    "start": "nodemon main.js"
   },
   "author": "Ed Me",
   "dependencies": {
     "@sendgrid/mail": "^6.3.1",
     "axios": "^0.18.0",
+    "bcrypt": "^3.0.2",
     "ejs": "^2.6.1",
     "joi": "^14.0.4",
+    "jsonwebtoken": "^8.3.0",
     "koa": "^2.5.2",
     "koa-bodyparser": "^4.2.1",
     "koa-compose": "^4.1.0",

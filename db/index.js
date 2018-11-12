@@ -34,7 +34,7 @@ module.exports = schemas.reduce((acc, /*cur*/{name, schema}) => {
 }, {})
 
 /*
-* @doc:console color
+* @doc-MacBook:console color
 * \033[字色编号;背景色编号m
 *
 * @grammar：

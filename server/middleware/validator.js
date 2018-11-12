@@ -9,7 +9,11 @@ module.exports = (schema = Joi.any(), data, status = 400) => {
     const {method} = ctx.request
     const record = ctx.request[method === 'POST' ? 'body' : 'query']
     const {error/*, value*/} = validate(record, schema)
-    if (error) return ctx.throw(status, error)
+    if (error) {
+      const {message} = error.details[0]
+      return ctx.throw(status, {message: message.replace(/"/g, '\'')})
+      // return ctx.throw(status, error)
+    }
     return next()
   }
 }

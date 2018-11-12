@@ -1,7 +1,7 @@
 // base config
 
 module.exports = {
-  /*db: {
+  /*db: { // Database configuration
     user: '',
     pass: '',
     dbName: '',
@@ -12,4 +12,8 @@ module.exports = {
     autoIndex: false,
     keepAlive: true,
   },*/
+  router: {
+    prefix: '/test', // Routing prefix
+    unlessPath: [/^\/$/, /\/register$/, /\/login$/, /^\/public/], // No need for token path
+  },
 }

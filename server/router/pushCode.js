@@ -29,6 +29,6 @@ module.exports = {
     }
 
     sendEmail(body)
-    ctx.body = body
+    ctx.throw(200, {record: body})
   },
 }

@@ -3,6 +3,8 @@ const docs = require('koa-docs')
 // https://github.com/hapijs/joi
 const Joi = require('joi')
 
+const {ERROR_CODE} = require('../util/constant')
+
 const testSchema = { // schema example
   id: Joi.number().integer(),
   name: Joi.string(),
@@ -39,7 +41,7 @@ module.exports = docs.get('/docs', { // Create a path for viewing the docs (only
           },
           * handler () { // required GeneratorFunction
             const test = this.request.body
-            if (!test.id) this.throw(400, 'Invalid ID supplied')
+            if (!test.id) this.throw(ERROR_CODE, 'Invalid ID supplied')
 
             return this.request.body
           }, // required GeneratorFunction
