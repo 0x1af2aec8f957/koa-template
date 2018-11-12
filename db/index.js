@@ -16,6 +16,7 @@ db.once('open', console.log.bind(console, '\033[30;44m SUCCESS \033[34;40m Mongo
 mongoose.connect('mongodb://localhost/test', {
   ...mongooseOptions,
   useNewUrlParser: true,
+  useFindAndModify: false // 需要使用Model.findOneAndUpdate()
 })
 
 module.exports = schemas.reduce((acc, /*cur*/{name, schema}) => {
