@@ -1,45 +1,54 @@
 // https://nodemailer.com
 const nodemailer = require('nodemailer')
-const {SUBSCRIBE_USERS, EmailAuth = {}} = require('../../config') // Subscribe user email
+
+const auth = {
+  user: '603803799@qq.com',
+  pass: 'xurzskuzbtwxbfdf',
+}
 
 const transporter = nodemailer.createTransport({
   // service: 'hotmail',
   host: 'smtp.qq.com',
   port: 465,
   secure: true, // true for 465, false for other ports
-  auth: EmailAuth,
-  secureConnection: true, // 使用 SSL
+  auth,
+  secureConnection: true, // use SSL
 })
 
-const mailOptions = {
-  from: `权川的个人网站 <${EmailAuth.user}>`, // sender address
-  to: '603803799@qq.com', // list of receivers
-  // bcc: SUBSCRIBE_USERS.join(','),
-  subject: 'Hello world', // Subject line
-  text: 'Hello world', // plain text body
-  // html: '<b>Hello world</b>', // html body
+const commonOption = {
+  from: `石油化工 <${auth.user}>`,
+  // to: 'receiver@sender.com',
+  // subject: 'Message title',
+  // text: 'Plaintext version of the message',
+  // html: '<p>HTML version of the message</p>'
 }
 
 module.exports = option => {
 
-  mailOptions.form = `${option.title} <${EmailAuth.user}>`
-  mailOptions.subject = option.subject
-  mailOptions.text = `
-  ${option.stdout}
-  ${option.name}\n
-  ${option.repository}\n
-  ${option.branch}\n
-  ${option.message}\n
- `
-  mailOptions.bcc = option.bcc
+  /*
+  * @params option [https://nodemailer.com/message/]
+  *
+  *  from - The email address of the sender. All email addresses can be plain ‘sender@server.com’ or formatted ’“Sender Name” sender@server.com‘, see Address object for details
+  *  to - Comma separated list or an array of recipients email addresses that will appear on the To: field
+  *  cc - Comma separated list or an array of recipients email addresses that will appear on the Cc: field
+  *  bcc - Comma separated list or an array of recipients email addresses that will appear on the Bcc: field
+  *  subject - The subject of the email
+  *  text - The plaintext version of the message as an Unicode string, Buffer, Stream or an attachment-like object ({path: ‘/var/data/…’})
+  *  html - The HTML version of the message as an Unicode string, Buffer, Stream or an attachment-like object ({path: ‘http://…‘})
+  *  attachments - An array of attachment objects (see Using attachments for details). Attachments can be used for embedding images as well.
+  * */
 
-  return transporter.sendMail(mailOptions,
-    (error, info) => {
-      if (error) {
-        console.error(error)
-      } else {
-        option.callback && option.callback(info)
-      }
-      transporter.close()
-    })
+  return new Promise(function (resolve, reject) {
+    transporter.sendMail({...commonOption, ...option},
+      (error, info) => {
+        if (error) {
+          reject({error})
+          console.error(`Send email to ${option.to} failed!\n`)
+        } else {
+          console.log(`Send email to ${option.to} success!\n`)
+          resolve({info})
+        }
+        transporter.close()
+      })
+  })
 }
