@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 })
 
 const commonOption = {
-  from: `石油化工 <${auth.user}>`,
+  from: `我是主标题哦 <${auth.user}>`,
   // to: 'receiver@sender.com',
   // subject: 'Message title',
   // text: 'Plaintext version of the message',
