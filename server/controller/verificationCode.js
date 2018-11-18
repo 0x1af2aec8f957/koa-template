@@ -30,6 +30,8 @@ exports.set = (key, len) => {
     delete codeObjects[key]
     clearTimeout(timer)
   }, options.delay * 60000)
+  console.log(`Successfully generated a verification code:{${key || value}:${value}}\n`)
+  return value
 }
 
 exports.get = code => {
