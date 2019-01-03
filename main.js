@@ -1,3 +1,3 @@
-const app = require('./server')
+const app = require('./service')
 
 app.listen(3001)

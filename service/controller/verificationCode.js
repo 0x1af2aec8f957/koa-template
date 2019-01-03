@@ -11,8 +11,7 @@ function randomString (len = 6) { // 随机字符串6
   const maxPos = $chars.length
   /** **默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
   let pwd = ''
-  for (let i = 0; i < len; i++) pwd += $chars.charAt(
-    Math.floor(Math.random() * maxPos))
+  for (let i = 0; i < len; i++) pwd += $chars.charAt(Math.floor(Math.random() * maxPos))
   return pwd
 }
 

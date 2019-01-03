@@ -1,7 +1,7 @@
 const Joi = require('joi')
 const {execSync} = require('child_process')
-const {PROCESS_DIR} = require('../util/constant')
-const sendEmail = require('../controller/sendEmail')
+const {PROCESS_DIR} = require('../../util/constant')
+const sendEmail = require('../../controller/sendEmail')
 // const {fetchTHistory} = require('./fetchResponse')
 
 module.exports = {

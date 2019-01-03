@@ -3,10 +3,11 @@
 // doc:https://mongoosejs.com/docs/guide.html
 const mongoose = require('mongoose')
 const {db: mongooseOptions = {}} = require('../config')
-const {resolve, getFiles} = require('../server/util/common')
-
-const files = getFiles(resolve('db')).filter(item => !~item.indexOf('index.js'))
-const schemas = files.map(path => require(path))
+const {resolve, getFiles} = require('../service/util/common')
+const filesSchemas = getFiles(resolve('db', 'schema')) // .filter(item => !~item.indexOf('index.js'))
+const filesMiddlewares = getFiles(resolve('db', 'middleware')) // .filter(item => !~item.indexOf('index.js'))
+const schemas = filesSchemas.map(path => require(path))
+const middlewares = filesMiddlewares.map(path => require(path))
 
 const db = mongoose.connection
 
@@ -15,7 +16,7 @@ db.once('open', console.log.bind(console, '\033[30;44m SUCCESS \033[34;40m Mongo
 
 mongoose.connect('mongodb://localhost/test', {
   ...mongooseOptions,
-  useNewUrlParser: true,
+  useNewUrlParser: true, // 使用新的规则解析url链接
   useFindAndModify: false // 需要使用Model.findOneAndUpdate()
 })
 
@@ -23,10 +24,14 @@ module.exports = schemas.reduce((acc, /*cur*/{name, schema}) => {
   const [
     currentName,
     currentSchema,
+    currentMiddleware,
   ] = [
     name.replace(/^\S{1}/g, s => s.toUpperCase()),
     new mongoose.Schema(schema),
+    middlewares.find(middleware => middleware.name === name)
   ]
+
+  currentMiddleware && currentSchema.method(currentMiddleware.method) // Adds an instance method to documents constructed from Models compiled from this schema.
 
   return {
     ...acc,
@@ -35,7 +40,7 @@ module.exports = schemas.reduce((acc, /*cur*/{name, schema}) => {
 }, {})
 
 /*
-* @doc-MacBook:console color
+* @doc:console color
 * \033[字色编号;背景色编号m
 *
 * @grammar：

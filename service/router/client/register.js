@@ -1,7 +1,7 @@
 const Joi = require('joi')
 // https://github.com/kelektiv/node.bcrypt.js
 const bcrypt = require('bcrypt')
-const {Regex} = require('../util/constant')
+const {Regex} = require('../../util/constant')
 
 module.exports = {
   path: '/register',

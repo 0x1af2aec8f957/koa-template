@@ -1,4 +1,4 @@
-const {Regex} = require('../server/util/constant')
+const {Regex} = require('../../service/util/constant')
 
 module.exports = {
   name: 'user',

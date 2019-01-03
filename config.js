@@ -13,7 +13,13 @@ module.exports = {
     keepAlive: true,
   },*/
   router: {
-    prefix: '/test', // Routing prefix
-    unlessPath: [/^\/$/, /\/register$/, /\/login$/, /^\/public/], // No need for token path
+    client: {
+      prefix: '/test',
+      unlessPath: [/\/register$/, /\/login$/, /\/getCode$/, /^\/public/, /\/authorization$/],
+    },
+    server: {
+      prefix: '/admin',
+      unlessPath: [/\/login$/, /^\/public/,/\/getCode$/],
+    },
   },
 }
