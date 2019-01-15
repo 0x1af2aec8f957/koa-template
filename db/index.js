@@ -20,14 +20,14 @@ mongoose.connect('mongodb://localhost/test', {
   useFindAndModify: false // 需要使用Model.findOneAndUpdate()
 })
 
-module.exports = schemas.reduce((acc, /*cur*/{name, schema}) => {
+module.exports = schemas.reduce((acc, /*cur*/{name, schema, autoIndex = true}) => {
   const [
     currentName,
     currentSchema,
     currentMiddleware,
   ] = [
     name.replace(/^\S{1}/g, s => s.toUpperCase()),
-    new mongoose.Schema(schema),
+    new mongoose.Schema(schema, {autoIndex}),
     middlewares.find(middleware => middleware.name === name)
   ]
 
