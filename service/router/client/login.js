@@ -36,8 +36,8 @@ module.exports = {
           userInfo: user,
           token: jwt.sign({ // decoded = jwt.verify(token, SECRET)
             data: user['_id'],
-            exp: Math.floor(Date.now() / 1000) + (60 * 60), // 设置 token 过期时间 ： 60 seconds * 60 minutes = 1 hour
-          }, SECRET),
+            // exp: Math.floor(Date.now() / 1000) + (60 * 60), // 设置 token 过期时间 ： 60 seconds * 60 minutes = 1 hour
+          }, SECRET, {expiresIn: 60 * 60}),
         },
       })
     } else {
