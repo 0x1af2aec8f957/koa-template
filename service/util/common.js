@@ -28,11 +28,13 @@ const getFiles = dir => { // Get all files
   return results
 }
 
-const attrSort = (array, attr, rev = 1) => {
-  return rev = rev ? 1 : -1, array.sort((a, b) => {
-    return [a, b] = [a[attr], b[attr]], a < b ? rev * -1 : a > b ? rev * 1 : 0
+const attrSort = (array, attr, rev = 1) => array.sort((a, b) => {
+    const [old, cur] = [
+      a.constructor === Object ? a[attr] : a,
+      b.constructor === Object ? b[attr] : b,
+    ];
+    return (old - cur) * rev;
   })
-}
 
 const getDirectorys = dir => { // Get all first level folders
   let results = []
@@ -44,8 +46,7 @@ const getDirectorys = dir => { // Get all first level folders
   return results
 }
 
-const base64_encode = file => new Buffer(fs.readFileSync(file)).toString(
-  'base64')
+const base64_encode = file => new Buffer(fs.readFileSync(file)).toString('base64')
 
 const format = (str, obj) => { // Mustache
   return str.replace(/\{([^\}]+)\}\}/gm, (all, self) => { // ECMAScript v3
