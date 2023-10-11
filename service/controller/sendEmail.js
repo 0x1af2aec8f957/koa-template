@@ -2,8 +2,8 @@
 const nodemailer = require('nodemailer')
 
 const auth = {
-  user: '603803799@qq.com',
-  pass: 'xurzskuzbtwxbfdf',
+  user: 'example@qq.com',
+  pass: 'example',
 }
 
 const transporter = nodemailer.createTransport({
